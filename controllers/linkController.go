@@ -75,7 +75,5 @@ func LinkGet(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"URL": l.OriginalLink,
-	})
+	c.Redirect(http.StatusMovedPermanently, l.OriginalLink)
 }
