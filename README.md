@@ -3,7 +3,6 @@
 Simple URL Shortner written in Go
 
 ## First Time setup
-*
 * Create your .env file, please edit it using all your relevant data:
     ```bash
     cp .example.env .env
