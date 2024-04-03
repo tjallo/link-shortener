@@ -53,3 +53,29 @@ func LinkCreate(c *gin.Context) {
 		"shortUrl": fullURL,
 	})
 }
+
+func LinkGet(c *gin.Context) {
+	link := c.Param("link")
+
+	if link == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid parameter",
+		})
+		return
+	}
+
+	var l models.Link
+
+	result := initializers.DB.Where("short_link = ?", link).First(&l)
+
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "link not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"URL": l.OriginalLink,
+	})
+}
