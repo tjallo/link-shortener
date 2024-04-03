@@ -5,11 +5,10 @@ import (
 	"strings"
 )
 
-func GenerateShortURL(urlLen int) string {
-	var alphabet = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-	var alphabetLen = len(alphabet)
+var alphabet = []byte("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+var alphabetLen = len(alphabet)
 
-	//  62^7 options should be plenty
+func GenerateShortURL(urlLen int) string {
 	sb := strings.Builder{}
 
 	for range urlLen {
