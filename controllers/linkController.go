@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tjalle/link-shortner/helpers"
-	"github.com/tjalle/link-shortner/initializers"
-	"github.com/tjalle/link-shortner/models"
+	"github.com/tjalle/link_shortener/helpers"
+	"github.com/tjalle/link_shortener/initializers"
+	"github.com/tjalle/link_shortener/models"
 )
 
 func LinkCreate(c *gin.Context) {

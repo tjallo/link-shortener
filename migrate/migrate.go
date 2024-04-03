@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/tjalle/link-shortner/initializers"
-	"github.com/tjalle/link-shortner/models"
+	"github.com/tjalle/link_shortener/initializers"
+	"github.com/tjalle/link_shortener/models"
 )
 
 func init() {

@@ -1,4 +1,4 @@
-module github.com/tjalle/link-shortner
+module github.com/tjalle/link_shortener
 
 go 1.22.1
 

@@ -39,6 +39,6 @@ func ConnectToDB() {
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		log.Fatal("Could not connect to DB")
+		log.Fatal("Could not connect to DB. Are you sure the DB exists and have you ran the migration?")
 	}
 }

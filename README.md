@@ -11,6 +11,7 @@ Still a work in progress, far from done
     ```
 * Run `docker compose up` to set up the MYSQL DB
 * Create a table using the name you choose in .env using your favorite DB tools
+* After making sure that the database exists in your MYSQL, run `go run migrate/migrate.go` to create the neccesairy tables
 * Run the Go program (`go run main.go`)
 
 ## Creating links

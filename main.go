@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tjalle/link-shortner/controllers"
-	"github.com/tjalle/link-shortner/initializers"
+	"github.com/tjalle/link_shortener/controllers"
+	"github.com/tjalle/link_shortener/initializers"
 )
 
 func init() {
