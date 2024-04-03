@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
@@ -12,9 +11,9 @@ import (
 )
 
 func LinkCreate(c *gin.Context) {
-
 	shortLink := helpers.GenerateShortURL(7)
 
+	// TODO: Add way to check if post param is actually an URL
 	originalUrl := c.PostForm("url")
 	isEmptyPostForm := originalUrl == ""
 
@@ -32,12 +31,18 @@ func LinkCreate(c *gin.Context) {
 	}
 
 	result := initializers.DB.Create(&link)
-
-	fmt.Printf("result: %v\n", result)
+	// Poor man's duplicate checking, could (and maybe should) be improved
+	if result.Error != nil {
+		c.JSON(
+			http.StatusInternalServerError, gin.H{
+				"message": "There was an error creating this URL, please try again.",
+			})
+		return
+	}
 
 	fullLink := os.Getenv("BASE_URL") + "/" + shortLink
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": fullLink,
+		"shortUrl": fullLink,
 	})
 }
