@@ -35,15 +35,17 @@ func LinkCreate(c *gin.Context) {
 		ShortLink:    shortLink,
 	}
 
-	result := initializers.DB.Create(&link)
-	// Poor man's duplicate checking, could (and maybe should) be improved
-	if result.Error != nil {
-		c.JSON(
-			http.StatusInternalServerError, gin.H{
-				"message": "There was an error creating this URL, please try again.",
-			})
+	tx := initializers.DB.Begin()
+
+	if err := tx.Create(&link).Error; err != nil {
+		tx.Rollback()
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Failed to create shortened URL, please try again.",
+		})
 		return
 	}
+
+	tx.Commit()
 
 	fullURL := os.Getenv("BASE_URL") + "/" + shortLink
 
