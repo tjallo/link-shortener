@@ -15,8 +15,19 @@ func LinkCreate(c *gin.Context) {
 
 	shortLink := helpers.GenerateShortURL(7)
 
+	originalUrl := c.PostForm("url")
+	isEmptyPostForm := originalUrl == ""
+
+	if isEmptyPostForm {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Missing 'url' parameter",
+		})
+
+		return
+	}
+
 	link := models.Link{
-		OriginalLink: "https://www.tjallo.nl/",
+		OriginalLink: originalUrl,
 		ShortLink:    shortLink,
 	}
 
