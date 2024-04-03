@@ -1,9 +1,8 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/tjalle/link-shortner/controllers"
 	"github.com/tjalle/link-shortner/initializers"
+	"github.com/tjalle/link-shortner/models"
 )
 
 func init() {
@@ -12,9 +11,5 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
-
-	r.POST("/links/create", controllers.LinkCreate)
-
-	r.Run()
+	initializers.DB.AutoMigrate(&models.Link{})
 }

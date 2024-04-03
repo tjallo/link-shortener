@@ -20,6 +20,7 @@ func ConnectToDB() {
 
 	var sb strings.Builder
 
+	// Constructs a string like this => "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	sb.WriteString(mysql_user)
 	sb.WriteString(":")
 	sb.WriteString(mysql_pass)
