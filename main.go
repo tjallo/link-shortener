@@ -16,6 +16,7 @@ func main() {
 
 	r.POST("/links/create", controllers.LinkCreate)
 
+	r.GET("/getAll", controllers.LinkGetAll)
 	r.GET("/:link", controllers.LinkGet)
 
 	r.Run()
