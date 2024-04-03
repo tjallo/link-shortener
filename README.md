@@ -23,3 +23,9 @@ curl --location 'localhost:3000/links/create' \
 ```
 
 This will return a JSON response containing the shortend URL
+
+## TODOs
+* Add authentication for the create route
+* Add more routes, e.g. `/get-all?limit=20`, `POST /delete {shortLink: 'a1b2c3'}` etc. 
+* Figure out some kind of front-end situation (svelte-kit)
+* Add more TODOs
