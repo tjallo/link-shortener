@@ -2,6 +2,8 @@
 
 Simple URL Shortner written in Go
 
+Still a work in progress, far from done
+
 ## First Time setup
 * Create your .env file, please edit it using all your relevant data:
     ```bash
