@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"net/url"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -13,20 +14,24 @@ import (
 func LinkCreate(c *gin.Context) {
 	shortLink := helpers.GenerateShortURL(7)
 
-	// TODO: Add way to check if post param is actually an URL
-	originalUrl := c.PostForm("url")
-	isEmptyPostForm := originalUrl == ""
-
-	if isEmptyPostForm {
+	originalURL := c.PostForm("url")
+	if originalURL == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Missing 'url' parameter",
 		})
+		return
+	}
 
+	// Validate the URL
+	if _, err := url.ParseRequestURI(originalURL); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid URL",
+		})
 		return
 	}
 
 	link := models.Link{
-		OriginalLink: originalUrl,
+		OriginalLink: originalURL,
 		ShortLink:    shortLink,
 	}
 
@@ -40,9 +45,9 @@ func LinkCreate(c *gin.Context) {
 		return
 	}
 
-	fullLink := os.Getenv("BASE_URL") + "/" + shortLink
+	fullURL := os.Getenv("BASE_URL") + "/" + shortLink
 
 	c.JSON(http.StatusOK, gin.H{
-		"shortUrl": fullLink,
+		"shortUrl": fullURL,
 	})
 }
