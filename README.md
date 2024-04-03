@@ -23,7 +23,7 @@ curl --location 'localhost:3000/links/create' \
 --form 'url="https://www.tweakers.net/"'
 ```
 
-This will return a JSON response containing the shortend URL
+This will return a JSON response containing the shortend URL path
 
 ## TODOs
 * Add authentication for the create route
