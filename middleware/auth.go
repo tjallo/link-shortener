@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tjalle/link_shortener/helpers"
+	"github.com/tjalle/link_shortener/auth"
 )
 
 func JWTAuthMiddleware() gin.HandlerFunc {
@@ -17,7 +17,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		isValidToken := helpers.VerifyToken(token[0])
+		isValidToken := auth.VerifyToken(token[0])
 
 		if isValidToken != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid JWT token sent"})

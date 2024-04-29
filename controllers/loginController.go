@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tjalle/link_shortener/helpers"
+	"github.com/tjalle/link_shortener/auth"
 )
 
 type LoginRequestBody struct {
@@ -32,7 +32,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	tokenString, err := helpers.CreateToken(requestBody.Username)
+	tokenString, err := auth.CreateToken(requestBody.Username)
 
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
