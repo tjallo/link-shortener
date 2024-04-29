@@ -13,12 +13,15 @@ import (
 )
 
 const (
-	SALT_BYTES = 32
-	HASH_BYTES = 64
+	SALT_BYTES      = 32
+	HASH_BYTES      = 64
+	HASHING_TIME    = 10
+	HASHING_MEMORY  = HASH_BYTES * 1024
+	HASHING_THREADS = 1
 )
 
 func hashPassword(password []byte, salt []byte) []byte {
-	return argon2.Key(password, salt, 3, 32*1024, 1, HASH_BYTES)
+	return argon2.Key(password, salt, HASHING_TIME, HASHING_MEMORY, HASHING_THREADS, HASH_BYTES)
 }
 
 func generateRandomSalt() []byte {
