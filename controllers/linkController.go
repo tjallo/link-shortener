@@ -77,3 +77,19 @@ func LinkGet(c *gin.Context) {
 
 	c.Redirect(http.StatusMovedPermanently, l.OriginalLink)
 }
+
+// TODO: finish (add limiting etc.)
+func LinkGetAll(c *gin.Context) {
+	var links []models.Link
+
+	result := initializers.DB.Select("OriginalLink", "ShortLink").Find(&links)
+
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "There was an error retreiving all links",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"allLinks": &links})
+}

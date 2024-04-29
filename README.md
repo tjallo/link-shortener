@@ -23,10 +23,10 @@ curl --location 'localhost:3000/links/create' \
 --form 'url="https://www.tweakers.net/"'
 ```
 
-This will return a JSON response containing the shortend URL
+This will return a JSON response containing the shortend URL path
 
 ## TODOs
-* Add authentication for the create route
+* ~~Add authentication for the create route~~ *Basic JWT authentication implementation is now done*
 * Add more routes, e.g. `/get-all?limit=20`, `POST /delete {shortLink: 'a1b2c3'}` etc. 
 * Figure out some kind of front-end admin panel situation (svelte-kit)
 * Add more TODOs
