@@ -15,9 +15,11 @@ func main() {
 	r := gin.Default()
 
 	r.POST("/links/create", controllers.LinkCreate)
+	r.POST("/login", controllers.Login)
 
 	r.GET("/getAll", controllers.LinkGetAll)
 	r.GET("/:link", controllers.LinkGet)
 
 	r.Run()
+
 }
