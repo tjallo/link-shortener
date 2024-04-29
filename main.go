@@ -25,12 +25,14 @@ func main() {
 	// Authorized Routes
 	{
 		authorized.POST("/links/create", controllers.LinkCreate)
+
 		authorized.GET("/getAll", controllers.LinkGetAll)
 	}
 
 	// Unauthorized Routes
 	{
 		r.POST("/login", controllers.Login)
+
 		r.GET("/:link", controllers.LinkGet)
 	}
 

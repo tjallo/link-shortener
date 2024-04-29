@@ -22,10 +22,9 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	// TODO: Login Verification
-	hasCorrectCredentials := requestBody.Username == "test" && requestBody.Password == "1234"
+	hasCorrectCredentials := auth.VerifyUser(requestBody.Username, requestBody.Password)
 
-	if !hasCorrectCredentials {
+	if hasCorrectCredentials != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"message": "Unauthorized.",
 		})
