@@ -9,15 +9,15 @@ import (
 
 func JWTAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.Request.Header["Token"][0]
+		token, ok := c.Request.Header["Token"]
 
-		if token == "" {
+		if !ok || len(token) == 0 || token[0] == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"message": "No JWT token found"})
 			c.Abort()
 			return
 		}
 
-		isValidToken := helpers.VerifyToken(token)
+		isValidToken := helpers.VerifyToken(token[0])
 
 		if isValidToken != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid JWT token sent"})
