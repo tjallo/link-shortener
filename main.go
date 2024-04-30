@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/tjalle/link_shortener/auth"
 	"github.com/tjalle/link_shortener/controllers"
@@ -9,16 +11,26 @@ import (
 	"github.com/tjalle/link_shortener/migrations"
 )
 
+func generateAdminUser() {
+	adminUsername := os.Getenv("ADMIN_USER")
+	adminPassword := os.Getenv("ADMIN_PASSWORD")
+
+	if adminPassword == "" || adminUsername == "" {
+		return
+	}
+
+	auth.CreateUser(adminUsername, adminPassword)
+}
+
 func init() {
 	initializers.LoadEnvironmentVariables()
 	initializers.ConnectToDB()
 	migrations.Migrate()
+	generateAdminUser()
 }
 
 func main() {
 	r := gin.New()
-
-	auth.CreateUser("tjalle", "SuperLangWachtwoord12!")
 
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
